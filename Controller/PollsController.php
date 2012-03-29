@@ -13,13 +13,27 @@ use Desarrolla2\PollBundle\Entity\PollOptionHit;
 class PollsController extends Controller {
 
     /**
-     * @Route("/poll/{id}", name="_poll_index", requirements={"id" = "[\d]+"}, defaults={ "id" = "1" })
+     * @Route("/polls", name="_poll_index")
      * @Template()
      * @return array
      */
     public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getEntityManager();
-        if (!$poll = $em->getRepository('Desarrolla2PollBundle:Poll')->findOneById($request->get('id'))) {
+        $polls = $em->getRepository('PollBundle:Poll')->findActives();
+        
+        return array(
+            'polls' => $polls,
+        );
+    }
+
+    /**
+     * @Route("/poll/{id}/{slug}", name="_poll_show", requirements={"id" = "[\d]+"}, defaults={ "id" = "1", "slug"= "" })
+     * @Template()
+     * @return array
+     */
+    public function showAction(Request $request) {
+        $em = $this->getDoctrine()->getEntityManager();
+        if (!$poll = $em->getRepository('PollBundle:Poll')->findOneById($request->get('id'))) {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
 
@@ -40,10 +54,10 @@ class PollsController extends Controller {
             $form->bindRequest($request);
             if ($form->isValid()) {
                 $form_request = $request->get('form');
-                if (!$poll_option = $em->getRepository('Desarrolla2PollBundle:PollOption')->findOneById($form_request['options'])) {
+                if (!$poll_option = $em->getRepository('PollBundle:PollOption')->findOneById($form_request['options'])) {
                     throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
                 }
-                $em->getRepository('Desarrolla2PollBundle:Poll')->setHit($poll, $poll_option);
+                $em->getRepository('PollBundle:Poll')->setHit($poll, $poll_option);
                 $this->getRequest()->getSession()->setFlash('notice', 'Muchas gracias hemos recibido su voto.');
                 return $this->redirect($this->generateUrl('_poll_report', array('id' => $poll->getId())));
             }
@@ -62,12 +76,13 @@ class PollsController extends Controller {
      */
     public function reportAction(Request $request) {
         $em = $this->getDoctrine()->getEntityManager();
-        if (!$poll = $em->getRepository('Desarrolla2PollBundle:Poll')->findOneById($request->get('id'))) {
+        if (!$poll = $em->getRepository('PollBundle:Poll')->findOneById($request->get('id'))) {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
         return array(
             'poll' => $poll,
-            'poll_options' => $em->getRepository('Desarrolla2PollBundle:Poll')->getResult($poll),
+            'poll_options' => $em->getRepository('PollBundle:Poll')->getResult($poll),
         );
     }
+
 }

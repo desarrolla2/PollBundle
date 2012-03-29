@@ -143,14 +143,12 @@ class Poll {
         return $this->options;
     }
 
-
     /**
      * Set date
      *
      * @param datetime $date
      */
-    public function setDate($date)
-    {
+    public function setDate($date) {
         $this->date = $date;
     }
 
@@ -159,8 +157,17 @@ class Poll {
      *
      * @return datetime 
      */
-    public function getDate()
-    {
+    public function getDate() {
         return $this->date;
     }
+
+    /**
+     * Get title in slug format
+     * 
+     * @return string
+     */
+    public function getSlug() {
+        return preg_replace("#[^\d\w\-]#", '-', strtolower($this->getTitle()));
+    }
+
 }

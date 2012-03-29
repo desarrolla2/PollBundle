@@ -1,19 +1,15 @@
-{% extends 'Desarrolla2PollBundle::layout.html.twig' %}
+{% extends '::base.html.twig' %}
 {% block content %}
 <div class="page-content">
-    <section class="event-detail">
-        <h2>Encuesta</h2>           
-        <div class="event-info">                
-            <h3>{{ poll.title }}</h3>
-            {{ app.session.flash('notice') }}
-            {{ form_errors(form) }}
-            <form action="{{ url('_poll_index', { 'id': poll.id }) }}" method="post" id="form_poll" name="form_poll">
-                {{ form_row(form.options) }}
-                {{ form_rest(form) }}
-                <input type="submit" value="enviar" />
-            </form>        
-            <a href="{{ url('_poll_report', { 'id': poll.id }) }}" >Ver resultados</a>
-        </div>
+    <section>
+        <header>
+            <h2>Encuestas activas</h2>
+        </header>                  
+        <ul>
+        {% for poll in polls %}
+                <li><a href="{{ url('_poll_show', { 'id': poll.id, 'slug': poll.slug }) }}">{{ poll.title }}</a></li>
+        {% endfor %}
+        </ul>
     </section>
 </div>
 {% endblock %}

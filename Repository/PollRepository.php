@@ -68,5 +68,22 @@ class PollRepository extends EntityRepository {
         }
         return $result;
     }
-
+    /**
+     * Retrieve a list of active polls
+     * 
+     * @param integer $limit 
+     * @return array
+     */
+   
+    public function findActives($limit = 10){
+        $em = $this->getEntityManager();
+        $result = $em->createQuery(
+                ' SELECT p FROM  Desarrolla2\PollBundle\Entity\Poll p ' .
+                ' WHERE p.is_active = 1 '
+                )
+                ->setMaxResults((int)$limit)
+                ->getResult();
+        return $result;
+        
+    }
 }
