@@ -2,9 +2,8 @@
 {% block content %}
 <div class="page-content">
     <section>
-        <header>
-            <h2>Encuestas activas</h2>
-        </header>                  
+        <h2>Encuestas activas</h2>
+        <p>Estas son las encuestas que se encuentran activas en este momento, puedes participar en cualquiera de ellas</p>
         <ul>
         {% for poll in polls %}
                 <li><a href="{{ url('_poll_show', { 'id': poll.id, 'slug': poll.slug }) }}">{{ poll.title }}</a></li>
