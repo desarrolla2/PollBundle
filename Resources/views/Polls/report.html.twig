@@ -1,0 +1,29 @@
+{% extends 'Desarrolla2PollBundle::layout.html.twig' %}
+{% block content %}
+<div class="page-content">
+    <section class="event-detail">
+        <h2>Resultados de la encuesta</h2>           
+        <div class="event-info">                
+            <h3>{{ poll.title }}</h3>
+            {{ app.session.flash('notice') }}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Opción</th>
+                        <th>Resultados</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for option in poll_options %}
+                    <tr>
+                        <td>{{ option.title }}</td>
+                        <td>{{ option.hits }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ url('_poll_index', { 'id': poll.id }) }}" >Volver</a>
+        </div>
+    </section>
+</div>
+{% endblock %}
