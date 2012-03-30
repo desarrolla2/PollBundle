@@ -55,8 +55,8 @@ And make a
 
 ## Installation note for Database migrations
 
-If you like to updata your database automatically you need installDoctrineMigrationsBundle, 
-if you have not yet. 
+If you like to update your database automatically you need install 
+DoctrineMigrationsBundle, if you have not yet. 
 
 ### Get the bundle
 
@@ -99,9 +99,6 @@ public function registerBundles()
 }
 ```
 
-For this you can follow detail install instruction in 
-[this link](http://symfony.com/doc/master/bundles/DoctrineMigrationsBundle/index.html)
-
 ### Update database
 
 execute
@@ -110,18 +107,72 @@ execute
 
 Be careful that this will run SQL statements and you could lose data on your database
 
+You can follow detail install instruction in 
+[this link](http://symfony.com/doc/master/bundles/DoctrineMigrationsBundle/index.html)
 
 ## Installation note for Database fixtures:
 
-If you like to install example fixtures you need install DoctrineFixturesBundle 
-if you have not yet, for this you can follow install instruction in 
-[this link](http://symfony.com/doc/current/bundles/DoctrineFixturesBundle/index.html).
+If you like to load example fixtures in database you need install 
+DoctrineFixturesBundle, if you have not yet. 
 
-then execute
+### Get the bundle
+
+Add to your `/deps` file :
+
+```
+[doctrine-fixtures]
+    git=http://github.com/doctrine/data-fixtures.git
+
+[DoctrineFixturesBundle]
+    git=http://github.com/symfony/DoctrineFixturesBundle.git
+    target=/bundles/Symfony/Bundle/DoctrineFixturesBundle
+```
+
+Update vendors
+
+`php bin/vendors install`
+
+### Register namespace
+
+``` php
+// app/autoload.php
+$loader->registerNamespaces(array(
+    // ...
+    'Doctrine\\Common\\DataFixtures' => __DIR__.'/../vendor/doctrine-fixtures/lib',
+    'Doctrine\\Common' => __DIR__.'/../vendor/doctrine-common/lib',
+    // ...
+));
+```
+
+### Register bundle
+
+``` php
+// app/AppKernel.php
+public function registerBundles()
+{
+    $bundles = array(
+        //...
+        new Symfony\Bundle\DoctrineFixturesBundle\DoctrineFixturesBundle(),
+    );
+}
+```
+
+### Install Fixtures
+
+Execute
 
 `php app/console doctrine:fixtures:load`
 
 Be careful that this will run SQL statements and you could lose data on your database
+
+
+
+You can follow detail install instruction in 
+[this link](http://symfony.com/doc/current/bundles/DoctrineFixturesBundle/index.html)
+
+
+
+
 
 
 
