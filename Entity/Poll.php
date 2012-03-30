@@ -11,7 +11,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="polls")
  * @ORM\Entity(repositoryClass="Desarrolla2\PollBundle\Repository\PollRepository")
  */
-class Poll {
+class Poll
+{
 
     /**
      * @var integer $id
@@ -57,7 +58,8 @@ class Poll {
      */
     protected $options;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->options = new \Doctrine\Common\Collections\ArrayCollection();
         $this->date = new \DateTime('now');
     }
@@ -67,7 +69,8 @@ class Poll {
      *
      * @return integer 
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -76,7 +79,8 @@ class Poll {
      *
      * @param string $title
      */
-    public function setTitle($title) {
+    public function setTitle($title)
+    {
         $this->title = $title;
     }
 
@@ -85,7 +89,8 @@ class Poll {
      *
      * @return string 
      */
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 
@@ -94,7 +99,8 @@ class Poll {
      *
      * @param text $body
      */
-    public function setBody($body) {
+    public function setBody($body)
+    {
         $this->body = $body;
     }
 
@@ -103,7 +109,8 @@ class Poll {
      *
      * @return text 
      */
-    public function getBody() {
+    public function getBody()
+    {
         return $this->body;
     }
 
@@ -112,7 +119,8 @@ class Poll {
      *
      * @param boolean $isActive
      */
-    public function setIsActive($isActive) {
+    public function setIsActive($isActive)
+    {
         $this->is_active = $isActive;
     }
 
@@ -121,7 +129,8 @@ class Poll {
      *
      * @return boolean 
      */
-    public function getIsActive() {
+    public function getIsActive()
+    {
         return $this->is_active;
     }
 
@@ -130,7 +139,8 @@ class Poll {
      *
      * @param Desarrolla2\PollBundle\Entity\PollOption $optioons
      */
-    public function addPollOption(\Desarrolla2\PollBundle\Entity\PollOption $optioons) {
+    public function addPollOption(\Desarrolla2\PollBundle\Entity\PollOption $optioons)
+    {
         $this->options[] = $optioons;
     }
 
@@ -139,7 +149,8 @@ class Poll {
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getOptions() {
+    public function getOptions()
+    {
         return $this->options;
     }
 
@@ -148,7 +159,8 @@ class Poll {
      *
      * @param datetime $date
      */
-    public function setDate($date) {
+    public function setDate($date)
+    {
         $this->date = $date;
     }
 
@@ -157,7 +169,8 @@ class Poll {
      *
      * @return datetime 
      */
-    public function getDate() {
+    public function getDate()
+    {
         return $this->date;
     }
 
@@ -166,7 +179,8 @@ class Poll {
      * 
      * @return string
      */
-    public function getSlug() {
+    public function getSlug()
+    {
         return preg_replace("#[^\d\w\-]#", '-', strtolower($this->getTitle()));
     }
 
