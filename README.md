@@ -1,7 +1,7 @@
 PollBundle
 ==========
 
-# Poll bundle for Symfony2/Doctrine2
+# Poll Bundle for Symfony2/Doctrine2
 
 This bundle provides a poll feature for your web site.
 
@@ -52,6 +52,16 @@ And make a
       );
   }
 ```
+
+### Configure database
+
+if you havent configured your conection then update options in app/config/parameters.ini and execute
+
+`php app/console doctrine:database:create`
+
+`php app/console doctrine:schema:create`
+
+
 
 ## Installation note for Database migrations
 
@@ -164,8 +174,6 @@ Execute
 `php app/console doctrine:fixtures:load`
 
 Be careful that this will run SQL statements and you could lose data on your database
-
-
 
 You can follow detail install instruction in 
 [this link](http://symfony.com/doc/current/bundles/DoctrineFixturesBundle/index.html)
