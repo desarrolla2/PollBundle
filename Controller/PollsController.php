@@ -3,6 +3,7 @@
 namespace Desarrolla2\PollBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -89,7 +90,6 @@ class PollsController extends Controller {
      * @return array
      */
     public function reportAction($id) {
-        $request = $this->getRequest();
         $em = $this->getDoctrine()->getEntityManager();
 
         $poll = $em->getRepository('Desarrolla2PollBundle:Poll')
@@ -98,10 +98,16 @@ class PollsController extends Controller {
             throw new NotFoundHttpException();
         }
 
-        return array(
+        $pollInfo = array(
             'poll' => $poll,
             'poll_options' => $em->getRepository('Desarrolla2PollBundle:Poll')->getResult($poll),
         );
+
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            return new Response(json_encode($pollInfo), 200);
+        } else {
+            return $pollInfo;
+        }
     }
 
 }
