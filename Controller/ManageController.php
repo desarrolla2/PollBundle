@@ -3,15 +3,24 @@
 namespace Desarrolla2\PollBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class ManageController extends Controller {
 
 	/**
+	 * @Template()
 	 * Show a list of all available polls.
 	 */
 	public function listAction()
 	{
-		// TODO: implement listAction
+		$em = $this->getDoctrine()->getEntityManager();
+
+		$polls = $em->getRepository('Desarrolla2PollBundle:Poll')
+			->findAll();
+
+		return array(
+			'polls' => $polls
+		);
 	}
 
 	/**
@@ -45,7 +54,7 @@ class ManageController extends Controller {
 		$em->remove($poll);
 		$em->flush();
 
-		return $this->redirect($this->generateUrl('_poll_manage_list'));s
+		return $this->redirect($this->generateUrl('_poll_manage_list'));
 	}
 
 }
