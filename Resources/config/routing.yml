@@ -1,3 +1,21 @@
+# Manage related routes
+_poll_manage_add:
+    pattern: /admin/poll/edit/{id}
+    defaults: { _controller: Desarrolla2PollBundle:Manage:edit }
+
+_poll_manage_add:
+    pattern: /admin/poll/remove/{id}
+    defaults: { _controller: Desarrolla2PollBundle:Manage:remove }
+
+_poll_manage_add:
+    pattern: /admin/poll/add
+    defaults: { _controller: Desarrolla2PollBundle:Manage:add }
+
+_poll_manage_list:
+    pattern: /admin/poll/list
+    defaults: { _controller: Desarrolla2PollBundle:Manage:list }
+
+# Show related routes
 _poll_report:
     pattern: /poll/report/{id}
     defaults: { _controller: Desarrolla2PollBundle:Polls:report, id: 1 }

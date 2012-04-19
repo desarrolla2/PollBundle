@@ -10,9 +10,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use Desarrolla2\PollBundle\Form\PollType;
-use Desarrolla2\PollBundle\Entity\PollOptionHit;
-
 class PollsController extends Controller {
 
     /**
