@@ -1,16 +1,16 @@
 {% extends '::base.html.twig' %}
-{% block content %}
-<section >
-    <h2>Encuesta</h2>           
+{% block body %}
+<section>
+    <h2>Question</h2>           
         <h3>{{ poll.title }}</h3>
             {{ app.session.flash('notice') }}
             {{ form_errors(form) }}
-        <form action="{{ url('_poll_show', { 'id': poll.id, "slug": poll.slug }) }}" method="post" id="form_poll" name="form_poll">
+        <form action="{{ url('_poll_show', { 'id': poll.getID(), "slug": poll.getSlug() }) }}" method="post" id="form_poll" name="form_poll">
                 {{ form_row(form.options) }}
                 {{ form_rest(form) }}
-                <input type="submit" value="enviar" />
+                <input type="submit" value="Vote" />
         </form>        
-        <a href="{{ url('_poll_report', { 'id': poll.id }) }}" >Ver resultados</a>
-        <a href="{{ url('_poll_index') }}" >Ver todas</a>
+        <a href="{{ url('_poll_report', { 'id': poll.id }) }}" >Show results</a>
+        <a href="{{ url('_poll_index') }}" >All polls</a>
 </section>
 {% endblock %}

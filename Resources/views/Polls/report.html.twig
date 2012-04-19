@@ -1,16 +1,16 @@
 {% extends '::base.html.twig' %}
-{% block content %}
+{% block body %}
 <div class="page-content">
     <section class="event-detail">
-        <h2>Resultados de la encuesta</h2>           
+        <h2>Results for this poll</h2>           
         <div class="event-info">                
-            <h3>{{ poll.title }}</h3>
+            <h3>{{ poll.getTitle() }}</h3>
             {{ app.session.flash('notice') }}
             <table>
                 <thead>
                     <tr>
-                        <th>Opción</th>
-                        <th>Resultados</th>
+                        <th>Option</th>
+                        <th>Result</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,7 +22,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <a href="{{ url('_poll_show', { 'id': poll.id }) }}" >Volver</a>
+            <a href="{{ url('_poll_show', { 'id': poll.getID() }) }}" >Show</a>
         </div>
     </section>
 </div>

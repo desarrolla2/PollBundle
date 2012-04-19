@@ -7,17 +7,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 use Desarrolla2\PollBundle\Form\PollType;
 use Desarrolla2\PollBundle\Entity\PollOptionHit;
 
 class PollsController extends Controller {
 
     /**
-     * @Route("/polls", name="_poll_index")
      * @Template()
      * @return array
      */
-    public function indexAction(Request $request) {
+    public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
         $polls = $em->getRepository('PollBundle:Poll')->findActives();
         
@@ -27,13 +28,17 @@ class PollsController extends Controller {
     }
 
     /**
-     * @Route("/poll/{id}/{slug}", name="_poll_show", requirements={"id" = "[\d]+"}, defaults={ "id" = "1", "slug"= "" })
      * @Template()
+     * @param $id ID of the poll.
+     * @param $slug 
      * @return array
      */
-    public function showAction(Request $request) {
+    public function showAction($id, $slug = '') {
+        $request = $this->getRequest();
         $em = $this->getDoctrine()->getEntityManager();
-        if (!$poll = $em->getRepository('PollBundle:Poll')->findOneById($request->get('id'))) {
+
+        $poll = $em->getRepository('PollBundle:Poll')->find($id);
+        if (!$poll) {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
 
@@ -70,15 +75,19 @@ class PollsController extends Controller {
     }
 
     /**
-     * @Route("/poll/report/{id}", name="_poll_report", requirements={"id" = "[\d]+"}, defaults={ "id" = "1" })
      * @Template()
+     * @param $id ID of the poll.
      * @return array
      */
-    public function reportAction(Request $request) {
+    public function reportAction($id) {
+        $request = $this->getRequest();
         $em = $this->getDoctrine()->getEntityManager();
-        if (!$poll = $em->getRepository('PollBundle:Poll')->findOneById($request->get('id'))) {
-            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+
+        $poll = $em->getRepository('PollBundle:Poll')->find($id);
+        if (!$poll) {
+            throw new NotFoundHttpException();
         }
+
         return array(
             'poll' => $poll,
             'poll_options' => $em->getRepository('PollBundle:Poll')->getResult($poll),

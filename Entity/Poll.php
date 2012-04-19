@@ -95,6 +95,16 @@ class Poll
     }
 
     /**
+     * Get name (used by SSTSideboxBundle)
+     * 
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->title;
+    }
+
+    /**
      * Set body
      *
      * @param text $body
