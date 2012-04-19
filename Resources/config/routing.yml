@@ -1,9 +1,9 @@
 # Manage related routes
-_poll_manage_add:
+_poll_manage_edit:
     pattern: /admin/poll/edit/{id}
     defaults: { _controller: Desarrolla2PollBundle:Manage:edit }
 
-_poll_manage_add:
+_poll_manage_remove:
     pattern: /admin/poll/remove/{id}
     defaults: { _controller: Desarrolla2PollBundle:Manage:remove }
 
