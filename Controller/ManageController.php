@@ -37,7 +37,15 @@ class ManageController extends Controller {
 	 */
 	public function removeAction($id)
 	{
-		// TODO: implement removeAction
+		$em = $this->getDoctrine()->getRepository();
+
+		$poll = $em->getRepository('Desarrolla2PollBundle:Poll')
+			->find($id);
+
+		$em->remove($poll);
+		$em->flush();
+
+		return $this->redirect($this->generateUrl('_poll_manage_list'));s
 	}
 
 }
