@@ -20,7 +20,8 @@ class PollsController extends Controller {
      */
     public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
-        $polls = $em->getRepository('PollBundle:Poll')->findActives();
+        $polls = $em->getRepository('PollBundle:Poll')
+            ->findActives();
         
         return array(
             'polls' => $polls,
@@ -37,9 +38,10 @@ class PollsController extends Controller {
         $request = $this->getRequest();
         $em = $this->getDoctrine()->getEntityManager();
 
-        $poll = $em->getRepository('PollBundle:Poll')->find($id);
+        $poll = $em->getRepository('PollBundle:Poll')
+            ->find($id);
         if (!$poll) {
-            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+            throw new NotFoundHttpException();
         }
 
         $options = array();
@@ -59,12 +61,19 @@ class PollsController extends Controller {
             $form->bindRequest($request);
             if ($form->isValid()) {
                 $form_request = $request->get('form');
-                if (!$poll_option = $em->getRepository('PollBundle:PollOption')->findOneById($form_request['options'])) {
-                    throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+
+                $poll_option = $em->getRepository('PollBundle:PollOption')
+                    ->findOneById($form_request['options']);
+                if (!$poll_option) {
+                    throw new NotFoundHttpException();
                 }
+
                 $em->getRepository('PollBundle:Poll')->setHit($poll, $poll_option);
-                $this->getRequest()->getSession()->setFlash('notice', 'Muchas gracias hemos recibido su voto.');
-                return $this->redirect($this->generateUrl('_poll_report', array('id' => $poll->getId())));
+                $this->getRequest()->getSession()->setFlash('notice', 'Thanks for voting!');
+
+                return $this->redirect($this->generateUrl('_poll_report', array(
+                    'id' => $poll->getId()
+                )));
             }
         }
 
@@ -83,7 +92,8 @@ class PollsController extends Controller {
         $request = $this->getRequest();
         $em = $this->getDoctrine()->getEntityManager();
 
-        $poll = $em->getRepository('PollBundle:Poll')->find($id);
+        $poll = $em->getRepository('PollBundle:Poll')
+            ->find($id);
         if (!$poll) {
             throw new NotFoundHttpException();
         }

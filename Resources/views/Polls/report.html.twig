@@ -22,7 +22,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <a href="{{ url('_poll_show', { 'id': poll.getID() }) }}" >Show</a>
+            <a href="{{ url('_poll_show', { 'id': poll.getID(), 'slug': poll.getSlug() }) }}" >Show</a>
         </div>
     </section>
 </div>
