@@ -1,4 +1,4 @@
-PollBundle
+Desarolla2PollBundle
 ==========
 
 # Poll Bundle for Symfony2/Doctrine2
@@ -47,7 +47,7 @@ And make a
   {
     return array(
       // ...
-      new Desarrolla2\PollBundle\PollBundle(),
+      new Desarrolla2\PollBundle\Desarolla2PollBundle(),
       // ...
       );
   }

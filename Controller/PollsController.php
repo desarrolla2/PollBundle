@@ -20,7 +20,7 @@ class PollsController extends Controller {
      */
     public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
-        $polls = $em->getRepository('PollBundle:Poll')
+        $polls = $em->getRepository('Desarolla2PollBundle:Poll')
             ->findActives();
         
         return array(
@@ -38,7 +38,7 @@ class PollsController extends Controller {
         $request = $this->getRequest();
         $em = $this->getDoctrine()->getEntityManager();
 
-        $poll = $em->getRepository('PollBundle:Poll')
+        $poll = $em->getRepository('Desarolla2PollBundle:Poll')
             ->find($id);
         if (!$poll) {
             throw new NotFoundHttpException();
@@ -62,13 +62,13 @@ class PollsController extends Controller {
             if ($form->isValid()) {
                 $form_request = $request->get('form');
 
-                $poll_option = $em->getRepository('PollBundle:PollOption')
+                $poll_option = $em->getRepository('Desarolla2PollBundle:PollOption')
                     ->findOneById($form_request['options']);
                 if (!$poll_option) {
                     throw new NotFoundHttpException();
                 }
 
-                $em->getRepository('PollBundle:Poll')->setHit($poll, $poll_option);
+                $em->getRepository('Desarolla2PollBundle:Poll')->setHit($poll, $poll_option);
                 $this->getRequest()->getSession()->setFlash('notice', 'Thanks for voting!');
 
                 return $this->redirect($this->generateUrl('_poll_report', array(
@@ -92,7 +92,7 @@ class PollsController extends Controller {
         $request = $this->getRequest();
         $em = $this->getDoctrine()->getEntityManager();
 
-        $poll = $em->getRepository('PollBundle:Poll')
+        $poll = $em->getRepository('Desarolla2PollBundle:Poll')
             ->find($id);
         if (!$poll) {
             throw new NotFoundHttpException();
@@ -100,7 +100,7 @@ class PollsController extends Controller {
 
         return array(
             'poll' => $poll,
-            'poll_options' => $em->getRepository('PollBundle:Poll')->getResult($poll),
+            'poll_options' => $em->getRepository('Desarolla2PollBundle:Poll')->getResult($poll),
         );
     }
 
