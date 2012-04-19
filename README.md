@@ -53,6 +53,16 @@ And make a
   }
 ```
 
+### Set up router
+
+In your application's main router.yml, add this:
+
+```
+Desarrolla2PollBundle:
+    resource: "@Desarrolla2PollBundle/Resources/config/routing.yml"
+    prefix:   /
+```
+
 ### Configure database
 
 if you havent configured your conection then update options in app/config/parameters.ini and execute
