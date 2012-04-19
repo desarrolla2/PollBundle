@@ -1,11 +1,11 @@
 _poll_report:
     pattern: /poll/report/{id}
-    defaults: { _controller: PollBundle:Polls:report, id: 1 }
+    defaults: { _controller: Desarrolla2PollBundle:Polls:report, id: 1 }
 
 _poll_show:
     pattern: /poll/{id}/{slug}
-    defaults: { _controller: PollBundle:Polls:show, id: 1, slug: "" }
+    defaults: { _controller: Desarrolla2PollBundle:Polls:show, id: 1, slug: "" }
 
 _poll_index:
     pattern: /polls
-    defaults: { _controller: PollBundle:Polls:index }
+    defaults: { _controller: Desarrolla2PollBundle:Polls:index }
