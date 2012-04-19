@@ -98,9 +98,18 @@ class PollsController extends Controller {
             throw new NotFoundHttpException();
         }
 
+        $pollOptions = $em->getRepository('Desarrolla2PollBundle:Poll')
+            ->getResult($poll);
+
+        $number = 0;
+        foreach ($pollOptions as $option) {
+            $number += $option['hits'];
+        }
+
         $pollInfo = array(
             'poll' => $poll,
-            'poll_options' => $em->getRepository('Desarrolla2PollBundle:Poll')->getResult($poll),
+            'poll_options' => $pollOptions,
+            'number' => $number
         );
 
         if ($this->getRequest()->isXmlHttpRequest()) {
