@@ -1,0 +1,9 @@
+<form action="{{ path('_poll_manage_add') }}" method="post" {{ form_enctype(form) }}>
+	{{ form_errors(form) }}
+
+	{{ form_widget(form) }}
+	{{ form_rest(form) }}
+
+	<br />
+	<input type="submit" value="Add" />
+</form>

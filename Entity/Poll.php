@@ -53,7 +53,7 @@ class Poll
     private $date;
 
     /**
-     * @ORM\OneToMany(targetEntity="PollOption", mappedBy="poll")
+     * @ORM\OneToMany(targetEntity="PollOption", mappedBy="poll", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="id", referencedColumnName="poll_id")
      */
     protected $options;

@@ -10,6 +10,13 @@ class PollType extends AbstractType
 	public function buildForm(FormBuilder $builder, array $options)
 	{
         $builder->add('title');
+        $builder->add('body');
+        $builder->add('is_active', 'choice', array(
+        	'choices' => array(
+        		1 => 'Yes',
+        		0 => 'No'
+        	)
+        ));
 	}
 
 	public function getDefaultOptions(array $options)

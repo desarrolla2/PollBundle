@@ -1,0 +1,9 @@
+<form action="{{ path('_poll_manage_edit', {'id': poll.getID()}) }}" method="post" {{ form_enctype(form) }}>
+	{{ form_errors(form) }}
+
+	{{ form_widget(form) }}
+	{{ form_rest(form) }}
+
+	<br />
+	<input type="submit" value="Save" />
+</form>
