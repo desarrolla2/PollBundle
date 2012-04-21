@@ -1,0 +1,27 @@
+<table>
+	<thead>
+		<tr>
+			<th>Option</th>
+			<th>Hits</th>
+			<th> </th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for option in poll.getOptions() %}
+			<tr>
+				<td>{{ option.getTitle() }}</td>
+				<td>{{ option.getHits().count() }}</td>
+				<td>
+					<a href="{{ path('_poll_manage_option_edit', {'id': option.getID()}) }}">edit</a>
+					| <a href="{{ path('_poll_manage_option_remove', {'id': option.getID()}) }}">remove</a>
+				</td>
+			</tr>
+		{% else %}
+			<tr>
+				<td colspan="3">This poll doesn't have any options.</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+<a href="{{ path('_poll_manage_option_add', {'id': poll.getID()}) }}">+ Add option</a>

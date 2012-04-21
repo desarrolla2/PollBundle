@@ -4,17 +4,29 @@ namespace Desarrolla2\PollBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Doctrine\ORM\NoResultException;
 
 class ManageOptionController extends Controller {
 
 	/**
 	 * @Template()
 	 * Show the list of options for a Poll
-	 * @param
+	 * @param $id Poll ID.
 	 */
 	public function listAction($id)
 	{
-		// TODO: implement listAction
+		$em = $this->getDoctrine()->getEntityManager();
+
+		try {
+			$poll = $em->getRepository('Desarrolla2PollBundle:Poll')
+				->find($id);
+		} catch (NoResultException $ex) {
+			throw $this->createNotFoundException('Poll was not found.');
+		}
+
+		return array(
+			'poll' => $poll
+		);
 	}
 
 	/**
@@ -43,7 +55,7 @@ class ManageOptionController extends Controller {
 	 */
 	public function removeAction($id)
 	{
-		$em = $this->getDoctrine()->getRepository();
+		$em = $this->getDoctrine()->getEntityManager();
 
 		$option = $em->getRepository('Desarrolla2PollBundle:PollOption')
 			->find($id);

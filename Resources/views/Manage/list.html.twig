@@ -14,7 +14,8 @@
 				<td>{{ poll.getTitle() }}</td>
 				<td>{{ poll.getIsActive() }}</td>
 				<td>
-					<a href="{{ path('_poll_manage_edit', {'id': poll.getID()}) }}">edit</a>
+					<a href="{{ path('_poll_manage_options', {'id': poll.getID()}) }}">options</a>
+					| <a href="{{ path('_poll_manage_edit', {'id': poll.getID()}) }}">edit</a>
 					| <a href="{{ path('_poll_manage_remove', {'id': poll.getID()}) }}">remove</a>
 				</td>
 			</tr>
