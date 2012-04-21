@@ -9,7 +9,7 @@ class PollType extends AbstractType
 {
 	public function buildForm(FormBuilder $builder, array $options)
 	{
-        // TODO: implement PollType
+        $builder->add('title');
 	}
 
 	public function getDefaultOptions(array $options)
