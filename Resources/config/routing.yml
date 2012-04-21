@@ -15,6 +15,25 @@ _poll_manage_list:
     pattern: /admin/poll/list
     defaults: { _controller: Desarrolla2PollBundle:Manage:list }
 
+
+# Option manage related routes
+_poll_manage_option_edit:
+    pattern: /admin/poll/option/edit/{id}
+    defaults: { _controller: Desarrolla2PollBundle:ManageOption:edit }
+
+_poll_manage_option_remove:
+    pattern: /admin/poll/option/remove/{id}
+    defaults: { _controller: Desarrolla2PollBundle:ManageOption:remove }
+
+_poll_manage_option_add:
+    pattern: /admin/poll/option/add/{id}
+    defaults: { _controller: Desarrolla2PollBundle:ManageOption:add }
+
+_poll_manage_options:
+    pattern: /admin/poll/list/option/{id}
+    defaults: { _controller: Desarrolla2PollBundle:ManageOption:list }
+
+
 # Show related routes
 _poll_report:
     pattern: /poll/report/{id}

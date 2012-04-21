@@ -1,0 +1,25 @@
+<table>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Question</th>
+			<th>Active?</th>
+			<th> </th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for poll in polls %}
+			<tr>
+				<td>{{ poll.getID() }}</td>
+				<td>{{ poll.getTitle() }}</td>
+				<td>{{ poll.getIsActive() }}</td>
+				<td>
+					<a href="{{ path('_poll_manage_edit', {'id': poll.getID()}) }}">edit</a>
+					| <a href="{{ path('_poll_manage_remove', {'id': poll.getID()}) }}">remove</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+<a href="{{ path('_poll_manage_add') }}">Add poll</a>
