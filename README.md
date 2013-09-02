@@ -1,7 +1,7 @@
-PollBundle
-==========
-
 # Poll Bundle for Symfony2/Doctrine2
+
+This bundle is discontinued, you might want to use the 
+[enquiryBundle](https://github.com/Bodaclick/EnquiryBundle)
 
 This bundle provides a poll feature for your web site.
 
